@@ -11,7 +11,9 @@ To calculate the change in probability after a bet and the maximum payout in Man
 
 The model you shared is based on the following relationships:
 1. **Market Equation**:
+
    $$y^p \cdot n^{1-p} = k$$
+
    Where:
    - $y$ = number of YES shares in the pool
    - $n$ = number of NO shares in the pool
@@ -20,6 +22,7 @@ The model you shared is based on the following relationships:
 
 2. **Market Probability Formula**:
    The current probability of YES ($P_{YES}$) is:
+
    $$P_{YES} = \frac{p \cdot n}{p \cdot n + (1 - p) \cdot y}$$
 
 ### Change in Probability After the Bet
@@ -31,9 +34,8 @@ Let's break this down:
 1. **Initial Market Setup**:
    - You have the number of YES and NO shares in the pool: $y$ and $n$, respectively.
    - The current probability is given by:
-     $$
-     P_{YES} = \frac{p \cdot n}{p \cdot n + (1 - p) \cdot y}
-     $$
+  
+     $$P_{YES} = \frac{p \cdot n}{p \cdot n + (1 - p) \cdot y}$$
 
 2. **Post-Bet Adjustment**:
    Assume a bet of 100 units is placed, either on YES or NO. Let's consider both cases:
@@ -44,16 +46,19 @@ Let's break this down:
 3. **New Parameter $p_{\text{new}}$**:
    The new parameter $p_{\text{new}}$ must be adjusted to maintain the same probability $P_{YES}$. We solve for $p_{\text{new}}$ such that:
 
+
    $$\frac{p_{\text{new}} \cdot (n + \Delta n)}{p_{\text{new}} \cdot (n + \Delta n) + (1 - p_{\text{new}}) \cdot (y + \Delta y)} = P_{YES}$$
-   
+
+
    Here:
    - $\Delta y$ and $\Delta n$ represent changes in the YES and NO shares due to the bet (e.g., 100).
    - $P_{YES}$ is the probability before the bet.
 
 4. **Solving for $p_{\text{new}}$**:
    Rearranging the equation gives:
+
    $$p_{\text{new}} \cdot (n + \Delta n) = P_{YES} \cdot \left( p_{\text{new}} \cdot (n + \Delta n) + (1 - p_{\text{new}}) \cdot (y + \Delta y) \right)$$
-   
+
    This is a nonlinear equation in $p_{\text{new}}$, which can be solved numerically. After solving for $p_{\text{new}}$, we can calculate the new market probabilities.
 
 ### Change in Liquidity for a Trader
@@ -77,7 +82,7 @@ for YES shares, and similarly for NO shares.
 
 Manifold charges fees on each trade:
 
-- The fee is given by $ \text{fee} = 13\% \times (1 - \text{post-bet probability}) \times \text{trade amount} $.
+- The fee is given by $\text{fee} = 13\% \times (1 - \text{post-bet probability}) \times \text{trade amount}$.
 - Of this, 6% goes to the liquidity pool, 6% goes to the market creator, and 1% goes to Manifold.
 
 These fees are converted into equal numbers of YES and NO shares and added to the pool. The new liquidity is calculated after updating the parameter $p_{\text{new}}$. Liquidity providers can then earn these fees when redeeming their shares.
@@ -127,9 +132,7 @@ The **log-odds** of an event happening (YES in this case) is a transformation of
 
 For the probability $P_{YES}$ of a YES share, the **log-odds** is defined as:
 
-$$
-\text{Log-Odds}_{YES} = \ln\left(\frac{P_{YES}}{1 - P_{YES}}\right)
-$$
+$$\text{Log-Odds}_{YES} = \ln\left(\frac{P_{YES}}{1 - P_{YES}}\right)$$
 
 Where:
 - $P_{YES}$ is the market probability of YES occurring.
@@ -137,6 +140,7 @@ Where:
 
 #### Example:
 - If $P_{YES} = 0.6$, the log-odds is:
+
   $$\text{Log-Odds}_{YES} = \ln\left(\frac{0.6}{1 - 0.6}\right) = \ln\left(\frac{0.6}{0.4}\right) = \ln(1.5) \approx 0.405$$
 
 A **positive log-odds** means the probability of YES is greater than 50%, while a **negative log-odds** indicates that NO is more likely.
