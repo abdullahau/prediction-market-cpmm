@@ -22,7 +22,7 @@ The model you shared is based on the following relationships:
 
 2. **Market Probability Formula**:
    The current probability of YES ($P_{YES}$) is:
-   
+
    $$P_{YES} = \frac{p \cdot n}{p \cdot n + (1 - p) \cdot y}$$
 
 ### **Change in Probability After the Bet**
@@ -34,9 +34,7 @@ Let's break this down:
 1. **Initial Market Setup**:
    - You have the number of YES and NO shares in the pool: $y$ and $n$, respectively.
    - The current probability is given by:
-     $$
-     P_{YES} = \frac{p \cdot n}{p \cdot n + (1 - p) \cdot y}
-     $$
+     $$P_{YES} = \frac{p \cdot n}{p \cdot n + (1 - p) \cdot y}$$
 
 2. **Post-Bet Adjustment**:
    Assume a bet of 100 units is placed, either on YES or NO. Let's consider both cases:
@@ -47,9 +45,7 @@ Let's break this down:
 3. **New Parameter $p_{\text{new}}$**:
    The new parameter $p_{\text{new}}$ must be adjusted to maintain the same probability $P_{YES}$. We solve for $p_{\text{new}}$ such that:
 
-   $$
-   \frac{p_{\text{new}} \cdot (n + \Delta n)}{p_{\text{new}} \cdot (n + \Delta n) + (1 - p_{\text{new}}) \cdot (y + \Delta y)} = P_{YES}
-   $$
+   $$\frac{p_{\text{new}} \cdot (n + \Delta n)}{p_{\text{new}} \cdot (n + \Delta n) + (1 - p_{\text{new}}) \cdot (y + \Delta y)} = P_{YES}$$
    
    Here:
    - $\Delta y$ and $\Delta n$ represent changes in the YES and NO shares due to the bet (e.g., 100).
@@ -57,9 +53,8 @@ Let's break this down:
 
 4. **Solving for $p_{\text{new}}$**:
    Rearranging the equation gives:
-   $$
-   p_{\text{new}} \cdot (n + \Delta n) = P_{YES} \cdot \left( p_{\text{new}} \cdot (n + \Delta n) + (1 - p_{\text{new}}) \cdot (y + \Delta y) \right)
-   $$
+
+   $$p_{\text{new}} \cdot (n + \Delta n) = P_{YES} \cdot \left( p_{\text{new}} \cdot (n + \Delta n) + (1 - p_{\text{new}}) \cdot (y + \Delta y) \right)$$
    
    This is a nonlinear equation in $p_{\text{new}}$, which can be solved numerically. After solving for $p_{\text{new}}$, we can calculate the new market probabilities.
 
@@ -67,9 +62,7 @@ Let's break this down:
 
 For a trader who adds liquidity to the pool (with capital $l$), we calculate the change in liquidity as:
 
-$$
-s_{l,t} = \Delta \text{liquidity} = (y_t + l)^p \cdot (n_t + l)^{p-1} - y_t^p \cdot n_t^{p-1}
-$$
+$$s_{l,t} = \Delta \text{liquidity} = (y_t + l)^p \cdot (n_t + l)^{p-1} - y_t^p \cdot n_t^{p-1}$$
 
 Where:
 - $y_t$ and $n_t$ are the YES and NO shares at the time of liquidity provision.
@@ -78,9 +71,7 @@ Where:
 
 The trader then receives YES and NO shares based on their proportion of the total liquidity:
 
-$$
-\frac{s}{\sum s_{l,t}} \cdot y
-$$
+$$\frac{s}{\sum s_{l,t}} \cdot y$$
 
 for YES shares, and similarly for NO shares.
 
@@ -99,15 +90,11 @@ The maximum payout a trader can receive depends on the probability after the bet
 
 - If the trader bets on YES, their maximum payout (if YES wins) is proportional to the number of YES shares they bought, and is calculated as:
 
-$$
-\text{Payout}_{YES} = \frac{\text{Bet Amount}}{P_{YES, \text{new}}}
-$$
+$$\text{Payout}_{YES} = \frac{\text{Bet Amount}}{P_{YES, \text{new}}}$$
 
 - If the trader bets on NO, the payout is:
 
-$$
-\text{Payout}_{NO} = \frac{\text{Bet Amount}}{P_{NO, \text{new}}}
-$$
+$$\text{Payout}_{NO} = \frac{\text{Bet Amount}}{P_{NO, \text{new}}}$$
 
 Where $P_{YES, \text{new}}$ and $P_{NO, \text{new}}$ are the updated probabilities after the bet.
 
@@ -142,9 +129,7 @@ The **log-odds** of an event happening (YES in this case) is a transformation of
 
 For the probability $P_{YES}$ of a YES share, the **log-odds** is defined as:
 
-$$
-\text{Log-Odds}_{YES} = \ln\left(\frac{P_{YES}}{1 - P_{YES}}\right)
-$$
+$$\text{Log-Odds}_{YES} = \ln\left(\frac{P_{YES}}{1 - P_{YES}}\right)$$
 
 Where:
 - $P_{YES}$ is the market probability of YES occurring.
@@ -152,9 +137,8 @@ Where:
 
 #### **Example**:
 - If $P_{YES} = 0.6$, the log-odds is:
-  $$
-  \text{Log-Odds}_{YES} = \ln\left(\frac{0.6}{1 - 0.6}\right) = \ln\left(\frac{0.6}{0.4}\right) = \ln(1.5) \approx 0.405
-  $$
+  
+  $$\text{Log-Odds}_{YES} = \ln\left(\frac{0.6}{1 - 0.6}\right) = \ln\left(\frac{0.6}{0.4}\right) = \ln(1.5) \approx 0.405$$
 
 A **positive log-odds** means the probability of YES is greater than 50%, while a **negative log-odds** indicates that NO is more likely.
 
@@ -190,9 +174,7 @@ Let’s calculate the log-odds change for a 10,000-unit bet, assuming you know t
 
 For a bet of $B = 10,000$ units:
 
-$$
-\Delta \text{Log-Odds}_{YES} = E \times \ln\left(1 + \frac{10,000}{k}\right)
-$$
+$$\Delta \text{Log-Odds}_{YES} = E \times \ln\left(1 + \frac{10,000}{k}\right)$$
 
 - If $E$ is high, this will result in a large increase in log-odds, meaning the probability will shift significantly.
 - If $E$ is low, the impact on the log-odds and therefore the probability will be smaller.
@@ -205,9 +187,7 @@ Suppose:
 
 For a 10,000-unit trade on YES:
 
-$$
-\Delta \text{Log-Odds}_{YES} = 0.02 \times \ln\left(1 + \frac{10,000}{50,000}\right) = 0.02 \times \ln(1.2) \approx 0.02 \times 0.182 = 0.00364
-$$
+$$\Delta \text{Log-Odds}_{YES} = 0.02 \times \ln\left(1 + \frac{10,000}{50,000}\right) = 0.02 \times \ln(1.2) \approx 0.02 \times 0.182 = 0.00364$$
 
 This means the log-odds increase by 0.00364 for a 10,000-unit bet. You can then convert this back to the new market probability.
 
@@ -215,9 +195,7 @@ This means the log-odds increase by 0.00364 for a 10,000-unit bet. You can then 
 
 Once you know the change in log-odds, you can convert it back into the new probability $P_{YES,\text{new}}$:
 
-$$
-P_{YES, \text{new}} = \frac{e^{\text{Log-Odds}_{YES,\text{new}}}}{1 + e^{\text{Log-Odds}_{YES,\text{new}}}}
-$$
+$$P_{YES, \text{new}} = \frac{e^{\text{Log-Odds}_{YES,\text{new}}}}{1 + e^{\text{Log-Odds}_{YES,\text{new}}}}$$
 
 Where $\text{Log-Odds}_{YES,\text{new}}$ is the initial log-odds plus the change $\Delta \text{Log-Odds}_{YES}$.
 
