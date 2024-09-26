@@ -1,66 +1,74 @@
 # Maniswap
 
 ### Reference
+
 - [Maniswap v2](bit.ly/maniswap)
 - [Maniswap v3](https://manifoldmarkets.notion.site/Maniswap-V3-f619ffcb5cd540888fc31d164446a952)
-
 
 To calculate the change in probability after a bet and the maximum payout in Manifold Markets' modified CPMM model, let's summarize the key components and work through the steps in detail.
 
 ### **Overview of the Manifold CPMM Model**
 
 The model you shared is based on the following relationships:
+
 1. **Market Equation**:
-   
-   $$y^p \cdot n^{1-p} = k$$
-   
+   $$
+   y^p \cdot n^{1-p} = k
+   $$
    Where:
+
    - $y$ = number of YES shares in the pool
    - $n$ = number of NO shares in the pool
    - $p$ = a market parameter related to the probability
    - $k$ = a constant, determined by the liquidity and shares in the pool
 
-2. **Market Probability Formula**:
+2. __Market Probability Formula__:
    The current probability of YES ($P_{YES}$) is:
-   
-   $$P_{YES} = \frac{p \cdot n}{p \cdot n + (1 - p) \cdot y}$$
+   $$
+   P_{YES} = \frac{p \cdot n}{p \cdot n + (1 - p) \cdot y}
+   $$
 
 ### **Change in Probability After the Bet**
 
-To calculate the **new probability** after a bet, we need to consider how the shares in the pool change due to the bet and how the new $p$ (denoted as $p_{\text{new}}$) is recalculated to maintain the market probability.
+To calculate the __new probability__ after a bet, we need to consider how the shares in the pool change due to the bet and how the new $p$ (denoted as $p_{\text{new}}$) is recalculated to maintain the market probability.
 
 Let's break this down:
 
 1. **Initial Market Setup**:
+
    - You have the number of YES and NO shares in the pool: $y$ and $n$, respectively.
    - The current probability is given by:
-     $$
-     P_{YES} = \frac{p \cdot n}{p \cdot n + (1 - p) \cdot y}
-     $$
+      $$
+      P_{YES} = \frac{p \cdot n}{p \cdot n + (1 - p) \cdot y}
+      $$
 
 2. **Post-Bet Adjustment**:
-   Assume a bet of 100 units is placed, either on YES or NO. Let's consider both cases:
    
+   Assume a bet of 100 units is placed, either on YES or NO. Let's consider both cases:
+
    - **Bet on YES**: The number of YES shares increases by 100, so the new number of YES shares is $y + 100$, while the number of NO shares remains $n$.
    - **Bet on NO**: The number of NO shares increases by 100, so the new number of NO shares is $n + 100$, while the number of YES shares remains $y$.
 
-3. **New Parameter $p_{\text{new}}$**:
+3. **New Parameter** $p_{\text{new}}$:
+   
    The new parameter $p_{\text{new}}$ must be adjusted to maintain the same probability $P_{YES}$. We solve for $p_{\text{new}}$ such that:
 
    $$
    \frac{p_{\text{new}} \cdot (n + \Delta n)}{p_{\text{new}} \cdot (n + \Delta n) + (1 - p_{\text{new}}) \cdot (y + \Delta y)} = P_{YES}
    $$
-   
+
    Here:
+
    - $\Delta y$ and $\Delta n$ represent changes in the YES and NO shares due to the bet (e.g., 100).
    - $P_{YES}$ is the probability before the bet.
 
-4. **Solving for $p_{\text{new}}$**:
+4. **Solving for** $p_{\text{new}}$:
+
    Rearranging the equation gives:
    $$
    p_{\text{new}} \cdot (n + \Delta n) = P_{YES} \cdot \left( p_{\text{new}} \cdot (n + \Delta n) + (1 - p_{\text{new}}) \cdot (y + \Delta y) \right)
    $$
-   
+
    This is a nonlinear equation in $p_{\text{new}}$, which can be solved numerically. After solving for $p_{\text{new}}$, we can calculate the new market probabilities.
 
 ### **Change in Liquidity for a Trader**
@@ -72,6 +80,7 @@ s_{l,t} = \Delta \text{liquidity} = (y_t + l)^p \cdot (n_t + l)^{p-1} - y_t^p \c
 $$
 
 Where:
+
 - $y_t$ and $n_t$ are the YES and NO shares at the time of liquidity provision.
 - $l$ is the capital (or liquidity) added by the trader.
 - $p$ is the current market parameter.
@@ -116,18 +125,23 @@ Where $P_{YES, \text{new}}$ and $P_{NO, \text{new}}$ are the updated probabiliti
 To summarize the process of calculating the change in probability after a bet:
 
 1. **Determine the Initial Market Conditions**:
+
    - Use the current quantities of YES ($y$) and NO ($n$) shares and the parameter $p$ to calculate the initial market probability $P_{YES}$.
 
 2. **Apply the Bet**:
+
    - Adjust the number of YES or NO shares based on the bet amount.
 
-3. **Solve for the New $p_{\text{new}}$**:
+3. __Solve for the New $p_{\text{new}}$__:
+
    - Use the equation for market probability to solve for the new $p_{\text{new}}$, keeping the market probability constant.
 
 4. **Calculate the New Probabilities**:
+
    - Once $p_{\text{new}}$ is determined, compute the new market probabilities for YES and NO.
 
 5. **Determine the Maximum Payout**:
+
    - Calculate the maximum payout based on the updated probabilities.
 
 ### Conclusion
@@ -140,21 +154,23 @@ In the context of a prediction market like Manifold’s modified CPMM, **log-odd
 
 The **log-odds** of an event happening (YES in this case) is a transformation of the market probability into a logarithmic scale. This scale is useful because probabilities are bounded between 0 and 1, while log-odds can take on values from $-\infty$ to $+\infty$, allowing for easier analysis of large movements in market prices.
 
-For the probability $P_{YES}$ of a YES share, the **log-odds** is defined as:
+For the probability $P_{YES}$ of a YES share, the __log-odds__ is defined as:
 
 $$
 \text{Log-Odds}_{YES} = \ln\left(\frac{P_{YES}}{1 - P_{YES}}\right)
 $$
 
 Where:
+
 - $P_{YES}$ is the market probability of YES occurring.
 - $1 - P_{YES}$ is the market probability of NO occurring.
 
 #### **Example**:
+
 - If $P_{YES} = 0.6$, the log-odds is:
-  $$
-  \text{Log-Odds}_{YES} = \ln\left(\frac{0.6}{1 - 0.6}\right) = \ln\left(\frac{0.6}{0.4}\right) = \ln(1.5) \approx 0.405
-  $$
+   $$
+   \text{Log-Odds}_{YES} = \ln\left(\frac{0.6}{1 - 0.6}\right) = \ln\left(\frac{0.6}{0.4}\right) = \ln(1.5) \approx 0.405
+   $$
 
 A **positive log-odds** means the probability of YES is greater than 50%, while a **negative log-odds** indicates that NO is more likely.
 
@@ -162,7 +178,7 @@ A **positive log-odds** means the probability of YES is greater than 50%, while 
 
 **Elasticity** measures how sensitive the market’s log-odds are to changes in the number of YES or NO shares in the pool. In Manifold’s CPMM model, **elasticity** refers to the **log-odds change** for a given amount of currency (e.g., a 10,000-unit trade on YES or NO).
 
-Formally, elasticity $E$ is the change in log-odds per unit of trade (currency) or liquidity added to the pool. 
+Formally, elasticity $E$ is the change in log-odds per unit of trade (currency) or liquidity added to the pool.
 
 #### **Elasticity and Log-Odds Change**:
 
@@ -173,6 +189,7 @@ $$
 $$
 
 Where:
+
 - $E$ is the elasticity.
 - $B$ is the amount bet.
 - $k$ is the current liquidity in the market or a scaling factor representing the constant in the CPMM equation.
@@ -200,6 +217,7 @@ $$
 ### **Step-by-Step Calculation Example**:
 
 Suppose:
+
 - Elasticity $E = 0.02$,
 - Current liquidity $k = 50,000$.
 
