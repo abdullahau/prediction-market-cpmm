@@ -90,11 +90,11 @@ The maximum payout a trader can receive depends on the probability after the bet
 
 - If the trader bets on YES, their maximum payout (if YES wins) is proportional to the number of YES shares they bought, and is calculated as:
 
-$$\text{Payout}_{YES} = \frac{\text{Bet Amount}}{P_{YES, \text{new}}}$$
+$$Payout_{YES} = \frac{\text{Bet Amount}}{P_{YES, \text{new}}}$$
 
 - If the trader bets on NO, the payout is:
 
-$$\text{Payout}_{NO} = \frac{\text{Bet Amount}}{P_{NO, \text{new}}}$$
+$$Payout_{NO} = \frac{\text{Bet Amount}}{P_{NO, \text{new}}}$$
 
 Where $P_{YES, \text{new}}$ and $P_{NO, \text{new}}$ are the updated probabilities after the bet.
 
@@ -129,7 +129,7 @@ The **log-odds** of an event happening (YES in this case) is a transformation of
 
 For the probability $P_{YES}$ of a YES share, the **log-odds** is defined as:
 
-$$\text{Log-Odds}_{YES} = \ln\left(\frac{P_{YES}}{1 - P_{YES}}\right)$$
+$$Log-Odds_{YES} = \ln\left(\frac{P_{YES}}{1 - P_{YES}}\right)$$
 
 Where:
 - $P_{YES}$ is the market probability of YES occurring.
