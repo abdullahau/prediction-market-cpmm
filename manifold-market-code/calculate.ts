@@ -28,11 +28,11 @@ import {
   PseudoNumericContract,
   StonkContract,
 } from './contract'
-import { floatingEqual, floatingGreaterEqual } from './math'
-import { ContractMetric } from './contract-metric'
+import { floatingEqual, floatingGreaterEqual } from './util/math'
+import { ContractMetric } from 'common/contract-metric'
 import { Answer } from './answer'
-import { DAY_MS } from './time'
-import { computeInvestmentValueCustomProb } from './calculate-metrics'
+import { DAY_MS } from 'common/util/time'
+import { computeInvestmentValueCustomProb } from 'common/calculate-metrics'
 
 export function getProbability(
   contract: BinaryContract | PseudoNumericContract | StonkContract

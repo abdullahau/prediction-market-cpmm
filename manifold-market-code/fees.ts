@@ -1,5 +1,5 @@
-import { addObjects } from './object'
-import { TWOMBA_ENABLED } from './constants'
+import { addObjects } from 'common/util/object'
+import { TWOMBA_ENABLED } from './envs/constants'
 
 export const FEE_START_TIME = 1713292320000
 

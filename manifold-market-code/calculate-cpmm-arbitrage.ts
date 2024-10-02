@@ -5,12 +5,12 @@ import {
   calculateAmountToBuySharesFixedP,
   getCpmmProbability,
 } from './calculate-cpmm'
-import { binarySearch } from './algos'
+import { binarySearch } from './util/algos'
 import { computeFills } from './new-bet'
-import { floatingEqual } from './math'
+import { floatingEqual } from './util/math'
 import { Fees, getFeesSplit, getTakerFee, noFees, sumAllFees } from './fees'
-import { addObjects } from './object'
-import { MAX_CPMM_PROB, MIN_CPMM_PROB } from './contract'
+import { addObjects } from './util/object'
+import { MAX_CPMM_PROB, MIN_CPMM_PROB } from 'common/contract'
 
 const DEBUG = false
 export type ArbitrageBetArray = ReturnType<typeof combineBetsOnSameAnswers>

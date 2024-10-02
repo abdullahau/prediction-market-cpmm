@@ -1,5 +1,5 @@
-import { base64toPoints } from './og'
-import { removeUndefinedProps } from './object'
+import { base64toPoints } from './edge/og'
+import { removeUndefinedProps } from './util/object'
 import { first, last, mapValues, meanBy } from 'lodash'
 
 export type Point<X, Y, T = unknown> = { x: X; y: Y; obj?: T }

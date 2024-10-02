@@ -20,12 +20,12 @@ import {
   StonkContract,
 } from './contract'
 import { getFeesSplit, getTakerFee, noFees } from './fees'
-import { addObjects, removeUndefinedProps } from './object'
+import { addObjects, removeUndefinedProps } from './util/object'
 import {
   floatingEqual,
   floatingGreaterEqual,
   floatingLesserEqual,
-} from './math'
+} from './util/math'
 import { Answer } from './answer'
 import {
   ArbitrageBetArray,

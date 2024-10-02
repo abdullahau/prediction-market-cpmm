@@ -4,14 +4,14 @@ import { LimitBet } from './bet'
 import { Fees, getFeesSplit, getTakerFee, noFees } from './fees'
 import { LiquidityProvision } from './liquidity-provision'
 import { computeFills } from './new-bet'
-import { binarySearch } from './algos'
-import { EPSILON, floatingEqual } from './math'
+import { binarySearch } from './util/algos'
+import { EPSILON, floatingEqual } from './util/math'
 import {
   calculateCpmmMultiArbitrageSellNo,
   calculateCpmmMultiArbitrageSellYes,
 } from './calculate-cpmm-arbitrage'
 import { Answer } from './answer'
-import { CPMMContract, CPMMMultiContract } from './contract'
+import { CPMMContract, CPMMMultiContract } from 'common/contract'
 
 export type CpmmState = {
   pool: { [outcome: string]: number }

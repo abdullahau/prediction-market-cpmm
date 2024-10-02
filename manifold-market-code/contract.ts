@@ -1,5 +1,5 @@
 import { JSONContent } from '@tiptap/core'
-import { getDisplayProbability } from './calculate'
+import { getDisplayProbability } from 'common/calculate'
 import { Topic } from 'common/group'
 import { ChartAnnotation } from 'common/supabase/chart-annotations'
 import { sum } from 'lodash'
@@ -336,14 +336,14 @@ export function contractPool(contract: Contract) {
   return contract.mechanism === 'cpmm-1'
     ? formatMoney(contract.totalLiquidity)
     : contract.mechanism === 'cpmm-multi-1'
-    ? formatMoney(
+      ? formatMoney(
         sum(
           contract.answers.map((a) =>
             getLiquidity({ YES: a.poolYes, NO: a.poolNo })
           )
         )
       )
-    : 'Empty pool'
+      : 'Empty pool'
 }
 
 export const isBinaryMulti = (contract: Contract) =>
@@ -434,12 +434,12 @@ export type ContractParams = {
 
 export type MaybeAuthedContractParams =
   | {
-      state: 'authed'
-      params: ContractParams
-    }
+    state: 'authed'
+    params: ContractParams
+  }
   | {
-      state: 'deleted'
-    }
+    state: 'deleted'
+  }
 
 export const MAX_CPMM_PROB = 0.99
 export const MIN_CPMM_PROB = 0.01
@@ -473,8 +473,8 @@ export const getAdjustedProfit = (
         contract.createdTime > Date.parse(DPM_CUTOFF_TIMESTAMP)
         ? 9 * profit
         : isMarketRanked(contract)
-        ? undefined
-        : -1 * profit
+          ? undefined
+          : -1 * profit
     }
     const answer = answers?.find((a) => a.id === answerId)
     if (!answer) {
@@ -489,8 +489,8 @@ export const getAdjustedProfit = (
       contract.createdTime > Date.parse(DPM_CUTOFF_TIMESTAMP)
       ? 9 * profit
       : isMarketRanked(contract)
-      ? undefined
-      : -1 * profit
+        ? undefined
+        : -1 * profit
   }
 
   return isMarketRanked(contract) &&
@@ -498,6 +498,6 @@ export const getAdjustedProfit = (
     contract.resolutionTime <= PROFIT_CUTOFF_TIME
     ? 9 * profit
     : isMarketRanked(contract)
-    ? undefined
-    : -1 * profit
+      ? undefined
+      : -1 * profit
 }
